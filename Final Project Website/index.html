@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modular Temperature-Controlled Extruder</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="container">
+
+            <h1>Temperature Control Module</h1>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Temperature Control Module</a></li>
+                    <li><a href="about.html">About Page</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                    <li><a href="support.html">Support Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="form-container">
+                <h2>Set Temperature</h2>
+                <form id="temperatureForm">
+                    <input type="number" id="setTemperature" placeholder="Enter temperature" required>
+                    <button type="submit" id="setButton">Set</button>
+                </form>
+            </div>
+
+            <div class="actual-temperature">
+                <h2>Actual Temperature</h2>
+                <p id="actualTemperature">--°C</p>
+            </div>
+            <button id="stopButton">Stop</button>
+            
+        </div>
+
+        <script>
+            // Function to update the actual temperature from the ESP32
+            function updateActualTemperature() {
+                // Use a fetch request to retrieve temperature data from ESP32 or server
+                // Replace the URL with the actual endpoint that provides temperature data
+                fetch("http://your-esp32-endpoint.com/temperature")
+                    .then(response => response.json())
+                    .then(data => {
+                        actualTemperature.textContent = `${data.temperature}°C`;
+                    })
+                    .catch(error => {
+                        console.error("Failed to retrieve temperature data:", error);
+                    });
+            }
+
+            // Periodically update the actual temperature (e.g., every 5 seconds)
+            setInterval(updateActualTemperature, 5000);
+
+            // Rest of your code (form submission, stop button) remains the same
+        </script>
+
+    </body>
+</html>
+
